@@ -16,4 +16,4 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## Screenshots
-- [screenshots]
+- [[screenshots]](https://github.com/Ashraf0Sherif/Movies-app/tree/bcc7a25c1900f8163c1f1bd8eb23bf9148cd2564/screenshots)https://github.com/Ashraf0Sherif/Movies-app/tree/bcc7a25c1900f8163c1f1bd8eb23bf9148cd2564/screenshots
