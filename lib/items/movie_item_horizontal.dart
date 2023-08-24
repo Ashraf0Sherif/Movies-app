@@ -45,7 +45,7 @@ class MovieItemHorizontal extends StatelessWidget {
               Row(children: [
                 FavouriteIconButton(movie: movie),
                 Text(
-                  "${movie.popularity!.toInt()}",
+                  "${movie.popularity?.toInt()}",
                   style: const TextStyle(color: Colors.white),
                 ),
                 Expanded(
@@ -92,7 +92,7 @@ class MovieItemHorizontal extends StatelessWidget {
                       color: const Color(0xff1A202C).withOpacity(0.4),
                       borderRadius: BorderRadius.circular(10)),
                   child: Text(
-                    "Voting average : ${movie.voteAverage.toInt()}",
+                    "Voting average : ${movie.voteAverage!=null?movie.voteAverage.toInt():"Unknown"}",
                     style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ),
@@ -104,7 +104,7 @@ class MovieItemHorizontal extends StatelessWidget {
                   animationDuration: 600,
                   animation: true,
                   lineHeight: 2,
-                  percent: movie.voteAverage.ceil() / 10,
+                  percent: movie.voteAverage!=null?movie.voteAverage.ceil() / 10:0,
                   progressColor: const Color(0xff21D07A),
                 ),
               ),

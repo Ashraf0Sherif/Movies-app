@@ -93,7 +93,7 @@ class _MoviePageState extends State<MoviePage> {
                 BlurryContainer(
                   color: const Color(0xff262A34),
                   child: Text(
-                    widget.movie.overview!,
+                    widget.movie.overview!=null?widget.movie.overview!:"there is no overview yet !",
                     style: const TextStyle(color: Colors.white),
                     textAlign: TextAlign.justify,
                   ),
@@ -106,7 +106,7 @@ class _MoviePageState extends State<MoviePage> {
                     BlurryContainer(
                       color: const Color(0xff262A34),
                       child: Text(
-                        widget.movie.releaseDate == ""
+                        widget.movie.releaseDate == null
                             ? "Still not released"
                             : widget.movie.releaseDate!,
                         style: const TextStyle(
@@ -128,7 +128,7 @@ class _MoviePageState extends State<MoviePage> {
                           ),
                           const Spacer(),
                           Text(
-                            "${widget.movie.voteAverage!.toInt()}",
+                            "${widget.movie.voteAverage!=null?widget.movie.voteAverage.toInt():0}",
                             style: const TextStyle(color: Colors.white),
                           ),
                           const Spacer(),
@@ -148,7 +148,7 @@ class _MoviePageState extends State<MoviePage> {
                     BlurryContainer(
                       color: const Color(0xff262A34),
                       child: Text(
-                        "Budget : ${widget.movie.budget != 0 ? "\$ ${NumberFormat("#,##0", "en_US").format(widget.movie.budget)}" : "Unknown"}",
+                        "Budget : ${widget.movie.budget != 0 &&widget.movie.budget!=null? "\$ ${NumberFormat("#,##0", "en_US").format(widget.movie.budget)}" : "Unknown"}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
@@ -162,7 +162,7 @@ class _MoviePageState extends State<MoviePage> {
                             color: Colors.white,
                           ),
                           Text(
-                            "${widget.movie.runtime}",
+                            "${widget.movie.runtime ?? 0}",
                             style: const TextStyle(color: Colors.white),
                           ),
                         ],
@@ -172,7 +172,7 @@ class _MoviePageState extends State<MoviePage> {
                     BlurryContainer(
                       color: const Color(0xff262A34),
                       child: Text(
-                        "${widget.movie.status}",
+                        "${widget.movie.status??0}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
@@ -209,7 +209,7 @@ class _MoviePageState extends State<MoviePage> {
                   children: [
                     FavouriteIconButton(movie: widget.movie),
                     Text(
-                      "${widget.movie.popularity!.toInt()}",
+                      "${widget.movie.popularity!=null?widget.movie.popularity!.toInt():""}",
                       style: const TextStyle(color: Colors.white),
                     ),
                     SavedIconButton(movie: widget.movie),
@@ -222,13 +222,13 @@ class _MoviePageState extends State<MoviePage> {
                         backgroundColor: Colors.green,
                         disabledBackgroundColor: Colors.grey,
                         disabledForegroundColor: Colors.white),
-                    onPressed: (link != "" && widget.movie.avilable)
+                    onPressed: (link != "" && widget.movie.avilable==true)
                         ? () {
                             launchUrl(Uri.parse(link),
                                 mode: LaunchMode.externalApplication);
                           }
                         : null,
-                    child: Text((link != "" && widget.movie.avilable)
+                    child: Text((link != "" && widget.movie.avilable==true)
                         ? "Watch Now"
                         : "Coming Soon"),
                   ),

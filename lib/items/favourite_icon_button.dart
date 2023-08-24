@@ -16,19 +16,23 @@ class FavouriteIconButton extends StatelessWidget {
     final provider = Provider.of<MovieProvider>(context);
     return IconButton(
       onPressed: () {
-        if (movie.isFav) {
+        if (movie.isFav==true) {
           movie.isFav = false;
-          movie.popularity--;
+          if(movie.popularity!=null) {
+            movie.popularity--;
+          }
           provider.removeFav(movie);
         } else {
           movie.isFav = true;
-          movie.popularity++;
+          if(movie.popularity!=null) {
+            movie.popularity++;
+          }
           provider.addFav(movie);
         }
       },
       icon: AnimatedSwitcher(
         duration: Duration(milliseconds: duration),
-        child: movie.isFav
+        child: movie.isFav==true
             ? const Icon(
                 Icons.favorite,
                 color: Colors.red,

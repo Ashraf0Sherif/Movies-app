@@ -76,13 +76,12 @@ class _MoviesPageState extends State<MoviesPage> {
           Provider.of<MovieProvider>(context, listen: false).popularMovies,
       "top_rated": Provider.of<MovieProvider>(context, listen: false).topRated,
     };
+    print(moviesList);
     for (int i = 0; i < moviesList.length; i++) {
+      print(moviesList[i].id);
       http.Response response = await http.get(Uri.parse(
           "https://api.themoviedb.org/3/movie/${moviesList[i].id}?${widget.apiKey}"));
       Map<String, dynamic> body = jsonDecode(response.body);
-      http.Response getLink = await http.get(Uri.parse(
-          "https://api.themoviedb.org/3/movie/${moviesList[i].id}/watch/providers"));
-      Map<String, dynamic> bodyLink = jsonDecode(response.body);
       setState(() {
         if (moviesList[i].category == "upcoming") {
           int indx = Provider.of<MovieProvider>(context, listen: false)
@@ -95,7 +94,9 @@ class _MoviesPageState extends State<MoviesPage> {
               .upComingMovies[indx]
               .avilable = false;
         } else {
-          pusher[moviesList[i].category]!.add(Movie.fromJson(body));
+          if(pusher[moviesList[i].category]!=null) {
+            pusher[moviesList[i].category]!.add(Movie.fromJson(body));
+          }
         }
       });
     }

@@ -1,5 +1,5 @@
 class Movie {
-  bool adult = false, isFav = false, saved = false, avilable = true;
+  bool? adult = false, isFav = false, saved = false, avilable = true;
   String? originalTitle,
       posterPath,
       releaseDate,
@@ -26,8 +26,10 @@ class Movie {
 
   factory Movie.fromJson(json) {
     List<String> tmpList = [];
-    for (int i = 0; i < json["genres"].length; i++) {
-      tmpList.add(json["genres"][i]["name"]);
+    if(json["genres"]!=null) {
+      for (int i = 0; i < json["genres"].length; i++) {
+        tmpList.add(json["genres"][i]["name"]);
+      }
     }
     return Movie(
       adult: json["adult"],
