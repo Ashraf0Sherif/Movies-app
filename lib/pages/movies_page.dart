@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:movies_app/items/custom_list_view.dart';
 import 'package:movies_app/items/custom_text.dart';
@@ -12,22 +11,20 @@ import '../models/movie.dart';
 class MoviesPage extends StatefulWidget {
   const MoviesPage({super.key});
 
-  final String apiKey = "api_key=1566ebde9601bd69ca2daff29bcf8972";
-
   @override
   State<MoviesPage> createState() => _MoviesPageState();
 }
 
 class _MoviesPageState extends State<MoviesPage> {
-  bool searched = false;
   void fetchData() async {
     Map<String, List> pusher = {
       "trending":
-      Provider.of<MovieProvider>(context, listen: false).trendingMovies,
+          Provider.of<MovieProvider>(context, listen: false).trendingMovies,
       "popular":
-      Provider.of<MovieProvider>(context, listen: false).popularMovies,
-      "top_rated":
-      Provider.of<MovieProvider>(context, listen: false).topRated,
+          Provider.of<MovieProvider>(context, listen: false).popularMovies,
+      "top_rated": Provider.of<MovieProvider>(context, listen: false).topRated,
+      "upcoming":
+          Provider.of<MovieProvider>(context, listen: false).upComingMovies
     };
     try {
       List<MovieClass> moviesList = [];
@@ -51,20 +48,8 @@ class _MoviesPageState extends State<MoviesPage> {
         dynamic movieDetails =
             await MoviesService().getMovieDetails(id: moviesList[i].id);
         setState(() {
-          if (moviesList[i].category == "upcoming") {
-            int indx = Provider.of<MovieProvider>(context, listen: false)
-                .upComingMovies
-                .length;
-            Provider.of<MovieProvider>(context, listen: false)
-                .upComingMovies
-                .add(Movie.fromJson(movieDetails));
-            Provider.of<MovieProvider>(context, listen: false)
-                .upComingMovies[indx]
-                .avilable = false;
-          } else {
-            if (pusher[moviesList[i].category] != null) {
-              pusher[moviesList[i].category]!.add(Movie.fromJson(movieDetails));
-            }
+          if (pusher[moviesList[i].category] != null) {
+            pusher[moviesList[i].category]!.add(Movie.fromJson(movieDetails));
           }
         });
       }
@@ -155,8 +140,10 @@ class _MoviesPageState extends State<MoviesPage> {
   @override
   void initState() {
     // TODO: implement initState
-    if (searched) return;
-    fetchData();
-    searched = true;
+    if (Provider.of<MovieProvider>(context, listen: false)
+        .trendingMovies
+        .isEmpty) {
+      fetchData();
+    }
   }
 }
