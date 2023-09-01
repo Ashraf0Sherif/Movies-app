@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:movies_app/pages/favourites_page.dart';
-import 'package:movies_app/pages/saved_page.dart';
+import 'package:movies_app/pages/reacted_page.dart';
 
 import 'package:movies_app/pages/movies_page.dart';
 
@@ -16,8 +15,8 @@ class _DisplayedPageState extends State<DisplayedPage> {
   int _currentIndex = 0;
   final tabs = [
     MoviesPage(),
-    const FavouritesPage(),
-    const SavedPage(),
+    const ReactedPage(list: "favourite"),
+    const ReactedPage(list: "saved"),
   ];
 
   @override

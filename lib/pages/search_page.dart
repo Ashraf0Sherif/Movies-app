@@ -1,12 +1,13 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:movies_app/items/movie_item_vertical.dart';
+import 'package:movies_app/services/movies_service.dart';
+import '../items/movie_class.dart';
 import '../models/movie.dart';
 
 class SearchPage extends StatefulWidget {
   final String? text;
+
   SearchPage({super.key, this.text});
 
   @override
@@ -14,32 +15,22 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final String apiKey="api_key=1566ebde9601bd69ca2daff29bcf8972";
-  List<int> searchedMoviesID = [];
-  List<Movie> displayedMovies=[];
+  final String apiKey = "api_key=1566ebde9601bd69ca2daff29bcf8972";
+
+  List<Movie> displayedMovies = [];
+
   void fetchData() async {
     if (widget.text == null) return;
-    http.Response response = await http.get(Uri.parse(
-        "https://api.themoviedb.org/3/search/movie?query=${widget.text}&include_adult=false&language=en-US&page=1&$apiKey"));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      for (int i = 0; i < body.length; i++) {
-        try{
-          searchedMoviesID.add(body["results"][i]["id"]);
-        }catch(e){
-          print("no result for item number $i");
-        }
-      }
-        for(int i=0;i<searchedMoviesID.length;i++){
-          http.Response response = await http.get(
-              Uri.parse("https://api.themoviedb.org/3/movie/${searchedMoviesID[i]}?$apiKey"));
-          Map<String, dynamic> body = jsonDecode(response.body);
-          displayedMovies.add(Movie.fromJson(body));
-        }
-        setState(() {
-          displayedMovies;
-        });
+    List<MovieClass> searchedMoviesID = await MoviesService().globalList(
+        path:
+            "https://api.themoviedb.org/3/search/movie?query=${widget.text}&include_adult=false&language=en-US&page=1&",
+        category: "global");
+    for (int i = 0; i < searchedMoviesID.length; i++) {
+      dynamic movideDetails =
+          await MoviesService().getMovieDetails(id: searchedMoviesID[i].id);
+      displayedMovies.add(Movie.fromJson(movideDetails));
     }
+    setState(() {});
   }
 
   @override
@@ -56,9 +47,11 @@ class _SearchPageState extends State<SearchPage> {
                     colors: [Color(0xff202126), Color(0xff19202D)])),
             child: displayedMovies.isEmpty
                 ? const Center(
-                    child: CircularProgressIndicator(color: Colors.red,))
+                    child: CircularProgressIndicator(
+                    color: Colors.red,
+                  ))
                 : ListView.separated(
-              physics: const BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, int index) {
                       return MovieItemVertical(movie: displayedMovies[index]);
                     },

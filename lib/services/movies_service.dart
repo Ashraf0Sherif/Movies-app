@@ -20,4 +20,10 @@ class MoviesService {
     }
     return responseList;
   }
+  dynamic getMovieDetails({required int id}) async {
+    http.Response response = await http.get(Uri.parse(
+        "https://api.themoviedb.org/3/movie/$id?$apiKey"));
+    Map<String, dynamic> body = jsonDecode(response.body);
+    return body;
+  }
 }

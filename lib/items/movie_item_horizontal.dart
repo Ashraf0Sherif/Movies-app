@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/items/favourite_icon_button.dart';
 import 'package:movies_app/items/saved_icon_button.dart';
 import 'package:movies_app/pages/movie_page.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
