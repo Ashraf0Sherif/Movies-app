@@ -6,7 +6,7 @@ import 'package:movies_app/pages/search_page.dart';
 import 'package:movies_app/providers/movie_provider.dart';
 import 'package:movies_app/services/movies_service.dart';
 import 'package:provider/provider.dart';
-import '../items/movie_class.dart';
+import '../models/movie_class.dart';
 import '../models/movie.dart';
 
 class MoviesPage extends StatefulWidget {

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/items/movie_item_vertical.dart';
 import 'package:movies_app/services/movies_service.dart';
-import '../items/movie_class.dart';
+import '../models/movie_class.dart';
 import '../models/movie.dart';
 
 class SearchPage extends StatefulWidget {
