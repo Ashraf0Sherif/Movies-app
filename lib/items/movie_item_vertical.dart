@@ -55,6 +55,7 @@ class _MovieItemVerticalState extends State<MovieItemVertical> {
             ),
             Expanded(
               child: ListView(
+                physics: const BouncingScrollPhysics(),
                 children: [
                   BlurryContainer(
                     color: const Color(0xff262A34),

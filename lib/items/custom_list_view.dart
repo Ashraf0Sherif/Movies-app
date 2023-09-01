@@ -13,6 +13,7 @@ class CustomListView extends StatelessWidget {
       width: double.infinity,
       height: height,
       child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: list.length,
         itemBuilder: (BuildContext context, int index) {

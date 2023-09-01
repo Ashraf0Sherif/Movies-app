@@ -68,6 +68,7 @@ class _MoviePageState extends State<MoviePage> {
                 gradient: LinearGradient(
                     colors: [Color(0xff202126), Color(0xff19202D)])),
             child: ListView(
+              physics: const BouncingScrollPhysics(),
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6),

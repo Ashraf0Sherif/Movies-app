@@ -6,102 +6,74 @@ import 'package:movies_app/items/custom_list_view.dart';
 import 'package:movies_app/items/custom_text.dart';
 import 'package:movies_app/pages/search_page.dart';
 import 'package:movies_app/providers/movie_provider.dart';
+import 'package:movies_app/services/movies_service.dart';
 import 'package:provider/provider.dart';
+import '../items/movie_class.dart';
 import '../models/movie.dart';
 
 class MoviesPage extends StatefulWidget {
   MoviesPage({super.key});
 
   final String apiKey = "api_key=1566ebde9601bd69ca2daff29bcf8972";
-  bool searched = false;
 
   @override
   State<MoviesPage> createState() => _MoviesPageState();
 }
 
 class _MoviesPageState extends State<MoviesPage> {
+  bool searched = false;
   void fetchData() async {
-    List<MovieClass> moviesList = [];
-    //Trending
-    http.Response response = await http.get(Uri.parse(
-        "https://api.themoviedb.org/3/trending/all/day?${widget.apiKey}"));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      setState(() {
-        for (int i = 0; i < body.length; i++) {
-          moviesList.add(
-              MovieClass(id: body["results"][i]["id"], category: "trending"));
-        }
-      });
-    }
-    //Popular
-    response = await http.get(Uri.parse(
-        "https://api.themoviedb.org/3/movie/popular?${widget.apiKey}"));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      setState(() {
-        for (int i = 0; i < body.length; i++) {
-          moviesList.add(
-              MovieClass(id: body["results"][i]["id"], category: "popular"));
-        }
-      });
-    }
-    //Upcoming
-    response = await http.get(Uri.parse(
-        "https://api.themoviedb.org/3/movie/upcoming?${widget.apiKey}"));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      setState(() {
-        for (int i = 0; i < body.length; i++) {
-          moviesList.add(
-              MovieClass(id: body["results"][i]["id"], category: "upcoming"));
-        }
-      });
-    }
-    response = await http.get(Uri.parse(
-        "https://api.themoviedb.org/3/movie/top_rated?${widget.apiKey}"));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      setState(() {
-        for (int i = 0; i < body.length; i++) {
-          moviesList.add(
-              MovieClass(id: body["results"][i]["id"], category: "top_rated"));
-        }
-      });
-    }
-    Map<String, List> pusher = {
-      "trending":
-          Provider.of<MovieProvider>(context, listen: false).trendingMovies,
-      "popular":
-          Provider.of<MovieProvider>(context, listen: false).popularMovies,
-      "top_rated": Provider.of<MovieProvider>(context, listen: false).topRated,
-    };
-    print(moviesList);
-    for (int i = 0; i < moviesList.length; i++) {
-      print(moviesList[i].id);
-      http.Response response = await http.get(Uri.parse(
-          "https://api.themoviedb.org/3/movie/${moviesList[i].id}?${widget.apiKey}"));
-      Map<String, dynamic> body = jsonDecode(response.body);
-      setState(() {
-        if (moviesList[i].category == "upcoming") {
-          int indx = Provider.of<MovieProvider>(context, listen: false)
-              .upComingMovies
-              .length;
-          Provider.of<MovieProvider>(context, listen: false)
-              .upComingMovies
-              .add(Movie.fromJson(body));
-          Provider.of<MovieProvider>(context, listen: false)
-              .upComingMovies[indx]
-              .avilable = false;
-        } else {
-          if(pusher[moviesList[i].category]!=null) {
-            pusher[moviesList[i].category]!.add(Movie.fromJson(body));
+    try {
+      List<MovieClass> moviesList = [];
+      List<MovieClass> getterList = await MoviesService().globalList(
+          path: "https://api.themoviedb.org/3/trending/all/day?",
+          category: "trending");
+      moviesList = [...moviesList, ...getterList];
+      getterList = await MoviesService().globalList(
+          path: "https://api.themoviedb.org/3/movie/popular?",
+          category: "popular");
+      moviesList = [...moviesList, ...getterList];
+      getterList = await MoviesService().globalList(
+          path: "https://api.themoviedb.org/3/movie/upcoming?",
+          category: "upcoming");
+      moviesList = [...moviesList, ...getterList];
+      getterList = await MoviesService().globalList(
+          path: "https://api.themoviedb.org/3/movie/top_rated?",
+          category: "top_rated");
+      moviesList = [...moviesList, ...getterList];
+      Map<String, List> pusher = {
+        "trending":
+        Provider.of<MovieProvider>(context, listen: false).trendingMovies,
+        "popular":
+        Provider.of<MovieProvider>(context, listen: false).popularMovies,
+        "top_rated": Provider.of<MovieProvider>(context, listen: false).topRated,
+      };
+      for (int i = 0; i < moviesList.length; i++) {
+        http.Response response = await http.get(Uri.parse(
+            "https://api.themoviedb.org/3/movie/${moviesList[i].id}?${widget.apiKey}"));
+        Map<String, dynamic> body = jsonDecode(response.body);
+        setState(() {
+          if (moviesList[i].category == "upcoming") {
+            int indx = Provider.of<MovieProvider>(context, listen: false)
+                .upComingMovies
+                .length;
+            Provider.of<MovieProvider>(context, listen: false)
+                .upComingMovies
+                .add(Movie.fromJson(body));
+            Provider.of<MovieProvider>(context, listen: false)
+                .upComingMovies[indx]
+                .avilable = false;
+          } else {
+            if (pusher[moviesList[i].category] != null) {
+              pusher[moviesList[i].category]!.add(Movie.fromJson(body));
+            }
           }
-        }
-      });
+        });
+      }
+    } catch (e) {
+      print(e);
     }
   }
-
   @override
   Widget build(BuildContext context) {
     const double height = 360;
@@ -112,13 +84,14 @@ class _MoviesPageState extends State<MoviesPage> {
         decoration: const BoxDecoration(
             gradient:
                 LinearGradient(colors: [Color(0xff202126), Color(0xff19202D)])),
-        child: Provider.of<MovieProvider>(context).trendingMovies.isEmpty
+        child: provider.trendingMovies.isEmpty
             ? const Center(
                 child: CircularProgressIndicator(
                   color: Colors.red,
                 ),
               )
             : ListView(
+                physics: const BouncingScrollPhysics(),
                 children: [
                   Padding(
                     padding:
@@ -183,21 +156,8 @@ class _MoviesPageState extends State<MoviesPage> {
   @override
   void initState() {
     // TODO: implement initState
-    if (widget.searched) return;
+    if (searched) return;
     fetchData();
-    widget.searched = true;
-  }
-}
-
-class MovieClass {
-  final int id;
-  String category;
-
-  MovieClass({required this.id, required this.category});
-
-  @override
-  String toString() {
-    // TODO: implement toString
-    return "id : $id , category : $category\n";
+    searched = true;
   }
 }

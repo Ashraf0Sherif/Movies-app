@@ -27,6 +27,7 @@ class SavedPage extends StatelessWidget {
                 ),
               )
             : ListView(
+          physics: const BouncingScrollPhysics(),
                 children: [
                   const SizedBox(height: 40,),
                   CustomListView(list: provider.savedMovies, height: 420),

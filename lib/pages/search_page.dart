@@ -58,6 +58,7 @@ class _SearchPageState extends State<SearchPage> {
                 ? const Center(
                     child: CircularProgressIndicator(color: Colors.red,))
                 : ListView.separated(
+              physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, int index) {
                       return MovieItemVertical(movie: displayedMovies[index]);
                     },
