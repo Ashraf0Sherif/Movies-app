@@ -2,11 +2,10 @@ import 'dart:convert';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/widgets/favourite_icon_button.dart';
+import 'package:movies_app/widgets/movie_genres.dart';
 import 'package:movies_app/widgets/saved_icon_button.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/movie_model.dart';
-import '../providers/movie_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -47,8 +46,6 @@ class _MoviePageState extends State<MoviePage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<MovieProvider>(context);
-    const int duration = 520;
     return Scaffold(
       backgroundColor: const Color(0xff0F1116),
       appBar: AppBar(
@@ -183,26 +180,7 @@ class _MoviePageState extends State<MoviePage> {
                 const SizedBox(
                   height: 12,
                 ),
-                Wrap(
-                  direction: Axis.horizontal,
-                  children: widget.movie.genres.map((e) {
-                    return Padding(
-                        padding: const EdgeInsets.all(3),
-                        child: Container(
-                          padding: const EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                              color: const Color(0xff262A34),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                            e,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ));
-                  }).toList(),
-                ),
+                MovieGenres(genres: widget.movie.genres),
                 const SizedBox(
                   height: 12,
                 ),

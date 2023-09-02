@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../models/movie_model.dart';
-import 'movie_item_vertical.dart';
 class MovieGenres extends StatelessWidget {
   const MovieGenres({
     super.key,
@@ -14,7 +12,7 @@ class MovieGenres extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       direction: Axis.horizontal,
-      children: genres.map((e){
+      children: genres.map((e) {
         return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 3),
             child: Container(
