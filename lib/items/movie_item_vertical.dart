@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../models/movie.dart';
 import '../providers/movie_provider.dart';
+import 'movie_genres.dart';
 
 class MovieItemVertical extends StatefulWidget {
   final Movie movie;
@@ -92,26 +93,7 @@ class _MovieItemVerticalState extends State<MovieItemVertical> {
                   const SizedBox(
                     height: 8,
                   ),
-                  Wrap(
-                    direction: Axis.horizontal,
-                    children: widget.movie.genres.map((e){
-                      return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 3),
-                          child: Container(
-                            padding: const EdgeInsets.all(1.5),
-                            decoration: BoxDecoration(
-                                color: const Color(0xff262A34),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text(
-                              e,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Nunito',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ));
-                    }).toList(),
-                  ),
+                  MovieGenres(widget: widget),
                   const SizedBox(
                     height: 8,
                   ),

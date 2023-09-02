@@ -14,7 +14,7 @@ class DisplayedPage extends StatefulWidget {
 class _DisplayedPageState extends State<DisplayedPage> {
   int _currentIndex = 0;
   final tabs = [
-    MoviesPage(),
+    const MoviesPage(),
     const ReactedPage(list: "favourite"),
     const ReactedPage(list: "saved"),
   ];
