@@ -93,7 +93,7 @@ class _MovieItemVerticalState extends State<MovieItemVertical> {
                   const SizedBox(
                     height: 8,
                   ),
-                  MovieGenres(widget: widget),
+                  MovieGenres(genres: widget.movie.genres),
                   const SizedBox(
                     height: 8,
                   ),
