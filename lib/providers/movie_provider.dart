@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../models/movie.dart';
+import '../models/movie_model.dart';
 
 class MovieProvider extends ChangeNotifier {
   List<Movie> trendingMovies = [];

@@ -1,12 +1,12 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/items/favourite_icon_button.dart';
-import 'package:movies_app/items/saved_icon_button.dart';
+import 'package:movies_app/widgets/favourite_icon_button.dart';
+import 'package:movies_app/widgets/saved_icon_button.dart';
 import 'package:movies_app/pages/movie_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-import '../models/movie.dart';
+import '../models/movie_model.dart';
 import '../providers/movie_provider.dart';
 
 class MovieItemHorizontal extends StatelessWidget {

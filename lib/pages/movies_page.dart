@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/items/custom_list_view.dart';
-import 'package:movies_app/items/custom_text.dart';
+import 'package:movies_app/widgets/custom_list_view.dart';
+import 'package:movies_app/widgets/custom_text.dart';
 import 'package:movies_app/pages/search_page.dart';
 import 'package:movies_app/providers/movie_provider.dart';
 import 'package:movies_app/services/movies_service.dart';
 import 'package:provider/provider.dart';
 import '../models/movie_class.dart';
-import '../models/movie.dart';
+import '../models/movie_model.dart';
 
 class MoviesPage extends StatefulWidget {
   const MoviesPage({super.key});

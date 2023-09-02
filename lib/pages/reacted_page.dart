@@ -1,9 +1,9 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/items/custom_list_view.dart';
+import 'package:movies_app/widgets/custom_list_view.dart';
 import 'package:provider/provider.dart';
 
-import '../models/movie.dart';
+import '../models/movie_model.dart';
 import '../providers/movie_provider.dart';
 
 class ReactedPage extends StatelessWidget {

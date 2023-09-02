@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/items/custom_text.dart';
-import 'package:movies_app/items/movie_item_vertical.dart';
+import 'package:movies_app/widgets/custom_text.dart';
+import 'package:movies_app/widgets/movie_item_vertical.dart';
 import 'package:movies_app/services/movies_service.dart';
 import '../models/movie_class.dart';
-import '../models/movie.dart';
+import '../models/movie_model.dart';
 
 class SearchPage extends StatefulWidget {
   final String? text;

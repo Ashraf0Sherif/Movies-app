@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/movie.dart';
+import '../models/movie_model.dart';
 import '../providers/movie_provider.dart';
 class SavedIconButton extends StatelessWidget {
   final Movie movie;

@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/items/favourite_icon_button.dart';
-import 'package:movies_app/items/saved_icon_button.dart';
+import 'package:movies_app/widgets/favourite_icon_button.dart';
+import 'package:movies_app/widgets/saved_icon_button.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../models/movie.dart';
+import '../models/movie_model.dart';
 import '../providers/movie_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
