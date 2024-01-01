@@ -1,7 +1,9 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/constatns.dart';
 
 import '../models/movie_model.dart';
+
 class MovieStatus extends StatelessWidget {
   const MovieStatus({super.key, required this.movie});
 
@@ -12,21 +14,25 @@ class MovieStatus extends StatelessWidget {
     return Row(
       children: [
         BlurryContainer(
-            color: const Color(0xff262A34),
-            child: Text(
-              movie.releaseDate == ""
-                  ? "Still not released"
-                  : movie.releaseDate!,
-              style: const TextStyle(color: Colors.white),
-            )),
+          color: kPrimaryColor,
+          child: Text(
+            movie.releaseDate == null
+                ? "Still not released"
+                : movie.releaseDate!,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
         const Spacer(),
         BlurryContainer(
-            color: const Color(0xff262A34),
-            child: Text(
-              "${movie.status}",
-              style: const TextStyle(color: Colors.white),
-            )),
-        const Spacer()
+          color: kPrimaryColor,
+          child: Text(
+            movie.status ?? "In Production",
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+        const Spacer(
+          flex: 3,
+        )
       ],
     );
   }

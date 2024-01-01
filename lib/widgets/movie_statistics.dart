@@ -1,47 +1,38 @@
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/widgets/saved_icon_button.dart';
+import 'package:movies_app/widgets/star_movie_average.dart';
+import 'package:provider/provider.dart';
 
 import '../models/movie_model.dart';
+import '../providers/movie_provider.dart';
 import 'favourite_icon_button.dart';
 
-class MovieStatistics extends StatelessWidget {
+class MovieStatistics extends StatefulWidget {
   const MovieStatistics({super.key, required this.movie});
 
   final Movie movie;
 
   @override
+  State<MovieStatistics> createState() => _MovieStatisticsState();
+}
+
+class _MovieStatisticsState extends State<MovieStatistics> {
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        BlurryContainer(
-          color: const Color(0xff262A34),
-          width: 60,
-          child: Row(
-            children: [
-              const Icon(
-                Icons.star,
-                color: Colors.yellow,
-              ),
-              const Spacer(),
-              Text(
-                "${movie.voteAverage!.toInt()}",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ],
-          ),
-        ),
+        StarMovieAverage(movie: widget.movie),
         const Spacer(),
-        FavouriteIconButton(movie: movie),
+        FavouriteIconButton(movie: widget.movie),
         const Spacer(),
         Text(
-          "${movie.popularity!.toInt()}",
+          "${widget.movie.popularity!.toInt()}",
           style: const TextStyle(color: Colors.white),
         ),
         const Spacer(
           flex: 3,
         ),
-        SavedIconButton(movie: movie),
+        SavedIconButton(movie: widget.movie),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/constatns.dart';
 import 'package:movies_app/models/movie_model.dart';
 
 import 'movie_item_horizontal.dart';
@@ -26,7 +27,7 @@ class CustomListView extends StatelessWidget {
             thickness: 1.5,
             indent: 60,
             endIndent: 60,
-            color: Color(0xff262A34),
+            color: kPrimaryColor,
           );
         },
       ),

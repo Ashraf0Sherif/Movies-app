@@ -1,5 +1,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/constatns.dart';
 
 import '../models/movie_model.dart';
 import 'movie_genres.dart';
@@ -30,7 +31,7 @@ class MovieItemVertical extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   BlurryContainer(
-                    color: const Color(0xff262A34),
+                    color: kPrimaryColor,
                     child: Text(
                       movie.originalTitle!,
                       style: const TextStyle(

@@ -4,14 +4,14 @@ import 'package:movies_app/pages/reacted_page.dart';
 
 import 'package:movies_app/pages/movies_page.dart';
 
-class DisplayedPage extends StatefulWidget {
-  const DisplayedPage({super.key});
+class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({super.key});
 
   @override
-  State<DisplayedPage> createState() => _DisplayedPageState();
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _DisplayedPageState extends State<DisplayedPage> {
+class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
   final tabs = [
     const MoviesPage(),

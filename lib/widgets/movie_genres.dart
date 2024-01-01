@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/constatns.dart';
 
 class MovieGenres extends StatelessWidget {
   const MovieGenres({
@@ -18,7 +19,7 @@ class MovieGenres extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(1.5),
               decoration: BoxDecoration(
-                  color: const Color(0xff262A34),
+                  color: kPrimaryColor,
                   borderRadius: BorderRadius.circular(10)),
               child: Text(
                 e,

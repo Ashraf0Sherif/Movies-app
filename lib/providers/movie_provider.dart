@@ -33,7 +33,4 @@ class MovieProvider extends ChangeNotifier {
     savedMovies.remove(movie);
     notifyListeners();
   }
-  bool checker(){
-    return trendingMovies.isEmpty&&popularMovies.isEmpty&&upComingMovies.isEmpty&&topRated.isEmpty;
-  }
 }

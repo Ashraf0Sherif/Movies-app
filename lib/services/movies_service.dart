@@ -36,5 +36,14 @@ class MoviesService {
     Map<String, dynamic> body = jsonDecode(response.body);
     return body;
   }
-
+  Future<String?> fetchLink({required int id}) async {
+    http.Response response = await http.get(Uri.parse(
+        "https://api.themoviedb.org/3/movie/$id/watch/providers?$apiKey"));
+    Map<String, dynamic> body = jsonDecode(response.body);
+    try {
+      return body["results"]["EG"]["link"];
+    } catch (e) {
+      return "";
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/constatns.dart';
 
 import '../models/movie_model.dart';
 import '../pages/movie_page.dart';
@@ -30,7 +31,7 @@ class MoviePoster extends StatelessWidget {
             image: DecorationImage(
               image: NetworkImage(movie.posterPath != null
                   ? "https://image.tmdb.org/t/p/w500/${movie.posterPath}"
-                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/660px-No-Image-Placeholder.svg.png?20200912122019"),
+                  : kNullImage),
               fit: BoxFit.cover,
             ),
           ),

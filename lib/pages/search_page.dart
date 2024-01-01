@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/constatns.dart';
 import 'package:movies_app/widgets/movie_item_vertical.dart';
 import 'package:movies_app/services/movies_service.dart';
 import '../models/movie_class.dart';
@@ -8,7 +9,7 @@ import '../widgets/error_message.dart';
 class SearchPage extends StatefulWidget {
   final String? text;
 
-  SearchPage({super.key, this.text});
+  const SearchPage({super.key, this.text});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -21,12 +22,14 @@ class _SearchPageState extends State<SearchPage> {
   void fetchData() async {
     try {
       if (widget.text == null) return;
-      List<MovieClass> searchedMoviesID = await MoviesService().globalList(
-          category: "search",searchText: widget.text);
+      List<MovieClass> searchedMoviesID = await MoviesService()
+          .globalList(category: "search", searchText: widget.text);
       for (int i = 0; i < searchedMoviesID.length; i++) {
         dynamic movieDetails =
             await MoviesService().getMovieDetails(id: searchedMoviesID[i].id);
-        displayedMovies.add(Movie.fromJson(movieDetails));
+        Movie movie = Movie.fromJson(movieDetails);
+        movie.link = await MoviesService().fetchLink(id: movie.id);
+        displayedMovies.add(movie);
       }
     } catch (e) {
       print(e);
@@ -45,9 +48,7 @@ class _SearchPageState extends State<SearchPage> {
           backgroundColor: const Color(0xff0F1116),
         ),
         body: Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Color(0xff202126), Color(0xff19202D)])),
+          decoration: const BoxDecoration(gradient: kLinearGradient),
           child: !searched
               ? const Center(
                   child: CircularProgressIndicator(
@@ -67,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
                           thickness: 1.5,
                           indent: 60,
                           endIndent: 60,
-                          color: Color(0xff262A34),
+                          color: kPrimaryColor,
                         );
                       },
                     ),
@@ -82,5 +83,3 @@ class _SearchPageState extends State<SearchPage> {
     fetchData();
   }
 }
-
-
