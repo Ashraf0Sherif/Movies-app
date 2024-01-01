@@ -6,12 +6,6 @@ import '../models/movie_class.dart';
 
 class MoviesService {
   final String apiKey = "api_key=1566ebde9601bd69ca2daff29bcf8972";
-  Map<String,String>path={
-    "trending":"https://api.themoviedb.org/3/trending/all/day?",
-    "popular":"https://api.themoviedb.org/3/movie/popular?",
-    "upcoming":"https://api.themoviedb.org/3/movie/upcoming?",
-    "top_rated":"https://api.themoviedb.org/3/movie/top_rated?"
-  };
   Future<List<MovieClass>> globalList(
       {required String category,String? searchText}) async {
     List<MovieClass> responseList = [];
