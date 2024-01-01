@@ -28,7 +28,7 @@ class _MoviesPageState extends State<MoviesPage> {
       "top_rated": provider.topRated,
       "upcoming": provider.upComingMovies
     };
-    ///
+    ////
     try {
       List<MovieClass> getTrendingList =
           await MoviesService().globalList(category: "trending");
