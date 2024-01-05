@@ -60,11 +60,13 @@ class MoviesCubit extends Cubit<MoviesState> {
   //Add and remove react functions
   void addFav(Movie movie) {
     movie.isFav = true;
+    movie.popularity++;
     favMovies.add(movie);
   }
 
   void removeFav(Movie movie) {
     movie.isFav = false;
+    movie.popularity--;
     favMovies.remove(movie);
   }
 

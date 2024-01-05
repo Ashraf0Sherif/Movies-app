@@ -10,36 +10,39 @@ class SuccessHomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubitProvider = BlocProvider.of<MoviesCubit>(context);
+    final cubitProvider = BlocProvider.of<MoviesCubit>(context);
     const double height = 360;
-    return ListView(
-      physics: const BouncingScrollPhysics(),
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          child: CustomSearchBar(),
-        ),
-        CustomText(text: 'Trending'),
-        CustomListView(list: cubitProvider.trendingMovies, height: height),
-        const SizedBox(
-          height: 20,
-        ),
-        CustomText(text: 'Popular'),
-        CustomListView(list: cubitProvider.popularMovies, height: height),
-        const SizedBox(
-          height: 20,
-        ),
-        CustomText(text: 'Top Rated'),
-        CustomListView(list: cubitProvider.topRated, height: height),
-        const SizedBox(
-          height: 20,
-        ),
-        CustomText(text: 'Up Coming'),
-        CustomListView(list: cubitProvider.upComingMovies, height: height),
-        const SizedBox(
-          height: 20,
-        ),
-      ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            child: CustomSearchBar(),
+          ),
+          CustomText(text: 'Trending'),
+          CustomListView(list: cubitProvider.trendingMovies, height: height),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomText(text: 'Popular'),
+          CustomListView(list: cubitProvider.popularMovies, height: height),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomText(text: 'Top Rated'),
+          CustomListView(list: cubitProvider.topRated, height: height),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomText(text: 'Up Coming'),
+          CustomListView(list: cubitProvider.upComingMovies, height: height),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
     );
   }
 }

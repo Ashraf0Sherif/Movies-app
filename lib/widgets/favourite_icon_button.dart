@@ -1,64 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/cubits/favourite_cubit/favourite_cubit.dart';
 import 'package:movies_app/cubits/movies_cubit/movies_cubit.dart';
 
 import '../models/movie_model.dart';
 
-class FavouriteIconButton extends StatefulWidget {
+class FavouriteIconButton extends StatelessWidget {
   final Movie movie;
 
   const FavouriteIconButton({super.key, required this.movie});
 
-  @override
-  State<FavouriteIconButton> createState() => _FavouriteIconButtonState();
-}
-
-class _FavouriteIconButtonState extends State<FavouriteIconButton> {
   final int duration = 520;
 
   @override
   Widget build(BuildContext context) {
     final moviesCubit = BlocProvider.of<MoviesCubit>(context);
-    return Row(
-      children: [
-        IconButton(
-          onPressed: () {
-            if (widget.movie.isFav == true) {
-              setState(() {
-                if (widget.movie.popularity != null) {
-                  widget.movie.popularity--;
+    final favouriteCubit = BlocProvider.of<FavouriteCubit>(context);
+    return BlocBuilder<FavouriteCubit, FavouriteState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                if (movie.isFav == false) {
+                  favouriteCubit.addFavourite();
+                  moviesCubit.addFav(movie);
+                } else {
+                  favouriteCubit.remFavourite();
+                  moviesCubit.removeFav(movie);
                 }
-                moviesCubit.removeFav(widget.movie);
-              });
-            } else {
-              setState(() {
-                if (widget.movie.popularity != null) {
-                  widget.movie.popularity++;
-                }
-                moviesCubit.addFav(widget.movie);
-              });
-            }
-          },
-          icon: AnimatedSwitcher(
-            duration: Duration(milliseconds: duration),
-            child: widget.movie.isFav == true
-                ? const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                    size: 25.8,
-                    key: ValueKey(1),
-                  )
-                : const Icon(
-                    Icons.favorite,
-                    color: Colors.white,
-                  ),
-          ),
-        ),
-        Text(
-          "${widget.movie.popularity?.toInt()}   ",
-          style: const TextStyle(color: Colors.white),
-        ),
-      ],
+              },
+              icon: AnimatedSwitcher(
+                duration: Duration(milliseconds: duration),
+                child: movie.isFav == true
+                    ? const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                        size: 25.8,
+                        key: ValueKey(1),
+                      )
+                    : const Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                      ),
+              ),
+            ),
+            Text(
+              "${movie.popularity?.toInt()}   ",
+              style: const TextStyle(color: Colors.white),
+            ),
+          ],
+        );
+      },
     );
   }
 }
