@@ -1,6 +1,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/constatns.dart';
+import 'package:movies_app/constants.dart';
 
 import '../models/movie_model.dart';
 import 'movie_genres.dart';

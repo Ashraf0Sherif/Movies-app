@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:movies_app/cubits/nav_bar_cubit/nav_bar_cubit.dart';
 import 'package:movies_app/pages/reacted_page.dart';
-
 import 'package:movies_app/pages/movies_page.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -17,7 +16,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<NavBarCubit,NavBarState>(
+      body: BlocBuilder<NavBarCubit, NavBarState>(
         builder: (context, state) {
           if (state is NavBarReactedPage) {
             return ReactedPage(list: state.list);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/constatns.dart';
+import 'package:movies_app/constants.dart';
 import 'package:movies_app/models/movie_model.dart';
-
 import 'movie_item_horizontal.dart';
 
 class CustomListView extends StatelessWidget {

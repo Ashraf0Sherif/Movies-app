@@ -1,7 +1,7 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
-import '../constatns.dart';
+import '../constants.dart';
 class MovieTitle extends StatelessWidget {
   const MovieTitle({
     super.key,

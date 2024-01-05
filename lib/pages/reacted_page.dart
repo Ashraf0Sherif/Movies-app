@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/cubits/movies_cubit/movies_cubit.dart';
 
-import '../constatns.dart';
+import '../constants.dart';
 import '../models/movie_model.dart';
 import '../widgets/custom_list_view.dart';
 

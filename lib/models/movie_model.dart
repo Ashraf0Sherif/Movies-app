@@ -1,4 +1,4 @@
-import 'package:movies_app/constatns.dart';
+import 'package:movies_app/constants.dart';
 
 class Movie {
   bool? adult = false, isFav = false, saved = false, avilable = true;

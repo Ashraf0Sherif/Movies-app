@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/constatns.dart';
+import 'package:movies_app/constants.dart';
 import 'package:movies_app/cubits/search_cubit/search_cubit.dart';
 import 'package:movies_app/widgets/movie_item_vertical.dart';
 import '../widgets/error_message.dart';
