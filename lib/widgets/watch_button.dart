@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/movie_model.dart';
+
 class WatchButton extends StatelessWidget {
-  const WatchButton({super.key,  required this.movie});
+  const WatchButton({super.key, required this.movie});
 
   final Movie movie;
 
@@ -16,13 +17,14 @@ class WatchButton extends StatelessWidget {
             backgroundColor: Colors.green,
             disabledBackgroundColor: Colors.grey,
             disabledForegroundColor: Colors.white),
-        onPressed: (movie.link != "" && movie.avilable == true)
-            ? () {
-          launchUrl(Uri.parse(movie.link),
-              mode: LaunchMode.externalApplication);
-        }
-            : null,
-        child: Text((movie.link != "" && movie.avilable == true)
+        onPressed:
+            (movie.link != "" && movie.avilable == true && movie.link != null)
+                ? () {
+                    launchUrl(Uri.parse(movie.link),
+                        mode: LaunchMode.externalApplication);
+                  }
+                : null,
+        child: Text((movie.link != "" && movie.avilable == true&& movie.link != null)
             ? "Watch Now"
             : "Coming Soon"),
       ),

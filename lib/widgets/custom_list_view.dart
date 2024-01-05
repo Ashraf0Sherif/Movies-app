@@ -20,7 +20,7 @@ class CustomListView extends StatelessWidget {
         itemCount: list.length,
         itemBuilder: (BuildContext context, int index) {
           return MovieItemHorizontal(
-            movie: list[index],
+            movie: list[index], width: 240,
           );
         },
         separatorBuilder: (BuildContext context, int index) {

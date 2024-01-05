@@ -11,10 +11,10 @@ import 'movie_title.dart';
 class MovieItemHorizontal extends StatelessWidget {
   final Movie movie;
 
-  const MovieItemHorizontal({super.key, required this.movie});
+  const MovieItemHorizontal({super.key, required this.movie, required this.width});
 
   final int duration = 520;
-
+  final double width;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,7 +33,7 @@ class MovieItemHorizontal extends StatelessWidget {
           );
         },
         child: Container(
-          width: 250,
+          width: width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(19),
             image: DecorationImage(
