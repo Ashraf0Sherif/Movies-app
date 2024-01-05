@@ -1,28 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cubits/movies_cubit/movies_cubit.dart';
 import '../models/movie_model.dart';
-import '../providers/movie_provider.dart';
-class SavedIconButton extends StatelessWidget {
+class SavedIconButton extends StatefulWidget {
   final Movie movie;
   const SavedIconButton({super.key,required this.movie});
+
+  @override
+  State<SavedIconButton> createState() => _SavedIconButtonState();
+}
+
+class _SavedIconButtonState extends State<SavedIconButton> {
   final int duration=520;
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<MovieProvider>(context);
+    final cubitProvider = BlocProvider.of<MoviesCubit>(context);
     return IconButton(
       onPressed: () {
-        if (movie.saved == false) {
-          movie.saved = true;
-          provider.addSave(movie);
+        if (widget.movie.saved == false) {
+          setState(() {
+            widget.movie.saved = true;
+          });
+
+          cubitProvider.addSave(widget.movie);
         } else {
-          movie.saved = false;
-          provider.removeSave(movie);
+          setState(() {
+            widget.movie.saved = false;
+          });
+
+          cubitProvider.removeSave(widget.movie);
         }
       },
       icon: AnimatedSwitcher(
         duration: Duration(milliseconds: duration),
-        child: movie.saved == false
+        child: widget.movie.saved == false
             ? const Icon(
           Icons.bookmark,
           color: Colors.white,

@@ -1,49 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/cubits/movies_cubit/movies_cubit.dart';
 
 import '../models/movie_model.dart';
-import '../providers/movie_provider.dart';
 
-class FavouriteIconButton extends StatelessWidget {
+class FavouriteIconButton extends StatefulWidget {
   final Movie movie;
 
   const FavouriteIconButton({super.key, required this.movie});
 
+  @override
+  State<FavouriteIconButton> createState() => _FavouriteIconButtonState();
+}
+
+class _FavouriteIconButtonState extends State<FavouriteIconButton> {
   final int duration = 520;
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<MovieProvider>(context);
-    return IconButton(
-      onPressed: () {
-        if (movie.isFav == true) {
-          movie.isFav = false;
-          if (movie.popularity != null) {
-            movie.popularity--;
-          }
-          provider.removeFav(movie);
-        } else {
-          movie.isFav = true;
-          if (movie.popularity != null) {
-            movie.popularity++;
-          }
-          provider.addFav(movie);
-        }
-      },
-      icon: AnimatedSwitcher(
-        duration: Duration(milliseconds: duration),
-        child: movie.isFav == true
-            ? const Icon(
-                Icons.favorite,
-                color: Colors.red,
-                size: 25.8,
-                key: ValueKey(1),
-              )
-            : const Icon(
-                Icons.favorite,
-                color: Colors.white,
-              ),
-      ),
+    final moviesCubit = BlocProvider.of<MoviesCubit>(context);
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            if (widget.movie.isFav == true) {
+              setState(() {
+                widget.movie.isFav = false;
+                if (widget.movie.popularity != null) {
+                  widget.movie.popularity--;
+                }
+                moviesCubit.removeFav(widget.movie);
+              });
+            } else {
+              setState(() {
+                widget.movie.isFav = true;
+                if (widget.movie.popularity != null) {
+                  widget.movie.popularity++;
+                }
+                moviesCubit.addFav(widget.movie);
+              });
+            }
+          },
+          icon: AnimatedSwitcher(
+            duration: Duration(milliseconds: duration),
+            child: widget.movie.isFav == true
+                ? const Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                    size: 25.8,
+                    key: ValueKey(1),
+                  )
+                : const Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                  ),
+          ),
+        ),
+        Text(
+          "${widget.movie.popularity?.toInt()}",
+          style: const TextStyle(color: Colors.white),
+        ),
+      ],
     );
   }
 }

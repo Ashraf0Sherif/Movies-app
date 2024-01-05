@@ -3,10 +3,12 @@ import 'package:movies_app/constatns.dart';
 import 'package:movies_app/models/movie_model.dart';
 
 import 'movie_item_horizontal.dart';
+
 class CustomListView extends StatelessWidget {
-  final List<Movie>list;
+  final List<Movie> list;
   final double height;
-  const CustomListView({super.key,required this.list,required this.height});
+
+  const CustomListView({super.key, required this.list, required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -34,4 +36,3 @@ class CustomListView extends StatelessWidget {
     );
   }
 }
-

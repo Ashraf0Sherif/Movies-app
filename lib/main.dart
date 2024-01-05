@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/cubits/movies_cubit/movies_cubit.dart';
+import 'package:movies_app/cubits/nav_bar_cubit/nav_bar_cubit.dart';
 import 'package:movies_app/pages/bottom_nav_bar.dart';
-import 'package:movies_app/providers/movie_provider.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => MovieProvider(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => NavBarCubit()),
+        BlocProvider(create: (context) => MoviesCubit()),
+      ],
       child: const MyApp(),
     ),
   );
