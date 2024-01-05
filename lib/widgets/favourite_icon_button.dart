@@ -25,7 +25,6 @@ class _FavouriteIconButtonState extends State<FavouriteIconButton> {
           onPressed: () {
             if (widget.movie.isFav == true) {
               setState(() {
-                widget.movie.isFav = false;
                 if (widget.movie.popularity != null) {
                   widget.movie.popularity--;
                 }
@@ -33,7 +32,6 @@ class _FavouriteIconButtonState extends State<FavouriteIconButton> {
               });
             } else {
               setState(() {
-                widget.movie.isFav = true;
                 if (widget.movie.popularity != null) {
                   widget.movie.popularity++;
                 }
@@ -57,7 +55,7 @@ class _FavouriteIconButtonState extends State<FavouriteIconButton> {
           ),
         ),
         Text(
-          "${widget.movie.popularity?.toInt()}",
+          "${widget.movie.popularity?.toInt()}   ",
           style: const TextStyle(color: Colors.white),
         ),
       ],

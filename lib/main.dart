@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/cubits/movies_cubit/movies_cubit.dart';
 import 'package:movies_app/cubits/nav_bar_cubit/nav_bar_cubit.dart';
+import 'package:movies_app/cubits/search_cubit/search_cubit.dart';
 import 'package:movies_app/pages/bottom_nav_bar.dart';
 
 void main() {
@@ -10,6 +11,7 @@ void main() {
       providers: [
         BlocProvider(create: (context) => NavBarCubit()),
         BlocProvider(create: (context) => MoviesCubit()),
+        BlocProvider(create: (context) => SearchCubit()),
       ],
       child: const MyApp(),
     ),

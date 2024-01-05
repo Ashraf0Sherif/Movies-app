@@ -21,11 +21,6 @@ class _MovieStatisticsState extends State<MovieStatistics> {
         StarMovieAverage(movie: widget.movie),
         const Spacer(),
         FavouriteIconButton(movie: widget.movie),
-        const Spacer(),
-        Text(
-          "${widget.movie.popularity!.toInt()}",
-          style: const TextStyle(color: Colors.white),
-        ),
         const Spacer(
           flex: 3,
         ),

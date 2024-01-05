@@ -27,11 +27,16 @@ class CustomSearchBar extends StatelessWidget {
         ),
       ),
       onFieldSubmitted: (text) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return SearchPage(
-            text: text,
-          );
-        }));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return SearchPage(
+                text: text,
+              );
+            },
+          ),
+        );
       },
     );
   }
