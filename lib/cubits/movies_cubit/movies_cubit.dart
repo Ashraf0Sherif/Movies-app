@@ -13,7 +13,9 @@ class MoviesCubit extends Cubit<MoviesState> {
   List<Movie> upComingMovies = [];
   List<Movie> topRated = [];
   List<Movie> favMovies = [];
+  List<int> favReact = [];
   List<Movie> savedMovies = [];
+  List<int> savedReact = [];
   Map<int, bool> vis = {};
 
   void fetchAll() async {
@@ -25,13 +27,13 @@ class MoviesCubit extends Cubit<MoviesState> {
     };
     try {
       List<MovieClass> getTrendingList =
-          await MoviesService().globalList(category: "trending");
+      await MoviesService().globalList(category: "trending");
       List<MovieClass> getPopularList =
-          await MoviesService().globalList(category: "popular");
+      await MoviesService().globalList(category: "popular");
       List<MovieClass> getUpComingList =
-          await MoviesService().globalList(category: "upcoming");
+      await MoviesService().globalList(category: "upcoming");
       List<MovieClass> getTopRatedList =
-          await MoviesService().globalList(category: "top_rated");
+      await MoviesService().globalList(category: "top_rated");
       List<MovieClass> moviesList = [
         ...getTrendingList,
         ...getTopRatedList,
@@ -42,7 +44,7 @@ class MoviesCubit extends Cubit<MoviesState> {
         if (vis[moviesList[i].id] == true) continue;
         vis[moviesList[i].id] = true;
         dynamic movieDetails =
-            await MoviesService().getMovieDetails(id: moviesList[i].id);
+        await MoviesService().getMovieDetails(id: moviesList[i].id);
         Movie movie = Movie.fromJson(movieDetails);
         if (movie.originalTitle == null) continue;
         movie.link = await MoviesService().fetchLink(id: moviesList[i].id);
@@ -59,24 +61,39 @@ class MoviesCubit extends Cubit<MoviesState> {
 
   //Add and remove react functions
   void addFav(Movie movie) {
-    movie.isFav = true;
-    movie.popularity++;
     favMovies.add(movie);
+    favReact.add(movie.id);
   }
 
   void removeFav(Movie movie) {
-    movie.isFav = false;
-    movie.popularity--;
+    favReact.remove(movie.id);
     favMovies.remove(movie);
   }
-
+  bool checkFavourite({required int id}){
+    var myListFiltered = favReact.where((e) => e == id);
+    if(myListFiltered.isEmpty){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  bool checkSaved({required int id}){
+    var myListFiltered = savedReact.where((e) => e == id);
+    if(myListFiltered.isEmpty){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
   void addSave(Movie movie) {
-    movie.saved = true;
     savedMovies.add(movie);
+    savedReact.add(movie.id);
   }
 
   void removeSave(Movie movie) {
-    movie.saved = false;
     savedMovies.remove(movie);
+    savedReact.remove(movie.id);
   }
 }

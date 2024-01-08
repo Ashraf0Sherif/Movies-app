@@ -19,7 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: BlocBuilder<NavBarCubit, NavBarState>(
         builder: (context, state) {
           if (state is NavBarReactedPage) {
-            return ReactedPage(list: state.list);
+            return const ReactedPage();
           } else {
             return const MoviesPage();
           }

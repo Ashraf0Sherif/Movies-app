@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/cubits/favourite_cubit/favourite_cubit.dart';
@@ -22,7 +23,7 @@ class FavouriteIconButton extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                if (movie.isFav == false) {
+                if (!moviesCubit.checkFavourite(id: movie.id)) {
                   favouriteCubit.addFavourite();
                   moviesCubit.addFav(movie);
                 } else {
@@ -32,7 +33,7 @@ class FavouriteIconButton extends StatelessWidget {
               },
               icon: AnimatedSwitcher(
                 duration: Duration(milliseconds: duration),
-                child: movie.isFav == true
+                child: moviesCubit.checkFavourite(id: movie.id)
                     ? const Icon(
                         Icons.favorite,
                         color: Colors.red,
@@ -46,7 +47,7 @@ class FavouriteIconButton extends StatelessWidget {
               ),
             ),
             Text(
-              "${movie.popularity?.toInt()}   ",
+              "${!moviesCubit.checkFavourite(id: movie.id) ? movie.popularity?.toInt() : movie.popularity?.toInt() + 1}   ",
               style: const TextStyle(color: Colors.white),
             ),
           ],

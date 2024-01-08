@@ -19,29 +19,28 @@ class SavedIconButton extends StatelessWidget {
       builder: (context, state) {
         return IconButton(
           onPressed: () {
-            if (movie.saved == true) {
-              moviesCubit.removeSave(movie);
+            if (!moviesCubit.checkSaved(id: movie.id)) {
               savedCubit.addSaved();
-            } else {
               moviesCubit.addSave(movie);
+            } else {
               savedCubit.remSaved();
+              moviesCubit.removeSave(movie);
             }
           },
           icon: AnimatedSwitcher(
-            duration: Duration(milliseconds: duration),
-            child: movie.saved == false
-                ? const Icon(
-                    Icons.bookmark,
-                    color: Colors.white,
-                    key: ValueKey(1),
-                  )
-                : const Icon(
-                    Icons.bookmark,
-                    color: Colors.red,
-                    size: 25.8,
-                    key: ValueKey(2),
-                  ),
-          ),
+              duration: Duration(milliseconds: duration),
+              child: moviesCubit.checkSaved(id: movie.id)
+                  ? const Icon(
+                      Icons.bookmark,
+                      color: Colors.red,
+                      size: 25.8,
+                      key: ValueKey(2),
+                    )
+                  : const Icon(
+                      Icons.bookmark,
+                      color: Colors.white,
+                      key: ValueKey(1),
+                    )),
         );
       },
     );
