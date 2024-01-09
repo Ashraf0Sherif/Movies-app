@@ -4,27 +4,22 @@ import 'package:movies_app/widgets/star_movie_average.dart';
 import '../models/movie_model.dart';
 import 'favourite_icon_button.dart';
 
-class MovieStatistics extends StatefulWidget {
+class MovieStatistics extends StatelessWidget {
   const MovieStatistics({super.key, required this.movie});
 
   final Movie movie;
 
   @override
-  State<MovieStatistics> createState() => _MovieStatisticsState();
-}
-
-class _MovieStatisticsState extends State<MovieStatistics> {
-  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        StarMovieAverage(movie: widget.movie),
+        StarMovieAverage(movie: movie),
         const Spacer(),
-        FavouriteIconButton(movie: widget.movie),
+        FavouriteIconButton(movie: movie),
         const Spacer(
           flex: 3,
         ),
-        SavedIconButton(movie: widget.movie),
+        SavedIconButton(movie: movie),
       ],
     );
   }

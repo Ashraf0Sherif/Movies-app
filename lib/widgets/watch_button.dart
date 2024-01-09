@@ -18,13 +18,13 @@ class WatchButton extends StatelessWidget {
             disabledBackgroundColor: Colors.grey,
             disabledForegroundColor: Colors.white),
         onPressed:
-            (movie.link != "" && movie.avilable == true && movie.link != null)
+            (movie.link != "" && movie.available == true && movie.link != null)
                 ? () {
                     launchUrl(Uri.parse(movie.link),
                         mode: LaunchMode.externalApplication);
                   }
                 : null,
-        child: Text((movie.link != "" && movie.avilable == true&& movie.link != null)
+        child: Text((movie.link != "" && movie.available == true&& movie.link != null)
             ? "Watch Now"
             : "Coming Soon"),
       ),

@@ -1,7 +1,7 @@
 import 'package:movies_app/constants.dart';
 
 class Movie {
-  bool? adult = false, isFav = false, saved = false, avilable = true;
+  bool adult = false, saved = false, available = true;
   String? originalTitle, posterPath, releaseDate, overview, backdrop, status;
   dynamic link;
   dynamic popularity, voteAverage, runtime, budget, id;
@@ -39,7 +39,7 @@ class Movie {
     } else {
       backdropImage = kNullImage;
     }
-    (json["popularity"] == null?popularity = 0: popularity=json["popularity"]);
+    popularity = json["popularity"] ?? 0;
     return Movie(
       adult: json["adult"],
       originalTitle: json["original_title"],

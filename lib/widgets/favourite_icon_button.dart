@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/cubits/favourite_cubit/favourite_cubit.dart';
 import 'package:movies_app/cubits/movies_cubit/movies_cubit.dart';
-
 import '../models/movie_model.dart';
 
 class FavouriteIconButton extends StatelessWidget {
