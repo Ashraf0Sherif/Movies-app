@@ -21,22 +21,22 @@ class SuccessHomeBody extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             child: CustomSearchBar(),
           ),
-          CustomText(text: 'Trending'),
+          const CustomText(text: 'Trending'),
           CustomListView(list: cubitProvider.trendingMovies, height: height),
           const SizedBox(
             height: 20,
           ),
-          CustomText(text: 'Popular'),
+          const CustomText(text: 'Popular'),
           CustomListView(list: cubitProvider.popularMovies, height: height),
           const SizedBox(
             height: 20,
           ),
-          CustomText(text: 'Top Rated'),
+          const CustomText(text: 'Top Rated'),
           CustomListView(list: cubitProvider.topRated, height: height),
           const SizedBox(
             height: 20,
           ),
-          CustomText(text: 'Up Coming'),
+          const CustomText(text: 'Up Coming'),
           CustomListView(list: cubitProvider.upComingMovies, height: height),
           const SizedBox(
             height: 20,

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import '../../models/movie_class.dart';
 import '../../models/movie_model.dart';
 import '../../services/movies_service.dart';
+
 part 'movies_state.dart';
 
 class MoviesCubit extends Cubit<MoviesState> {
@@ -60,7 +61,7 @@ class MoviesCubit extends Cubit<MoviesState> {
   //Add and remove react functions
   //Favourite functions
   void addFav(Movie movie) {
-    if(!checkFavourite(id: movie.id)){
+    if (!checkFavourite(id: movie.id)) {
       favMovies.add(movie);
       favReact.add(movie.id);
     }
@@ -79,6 +80,7 @@ class MoviesCubit extends Cubit<MoviesState> {
       return true;
     }
   }
+
   //Save functions
   void addSave(Movie movie) {
     savedReact.add(movie.id);
