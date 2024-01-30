@@ -11,10 +11,12 @@ import 'movie_title.dart';
 class MovieItemHorizontal extends StatelessWidget {
   final Movie movie;
 
-  const MovieItemHorizontal({super.key, required this.movie, required this.width});
+  const MovieItemHorizontal(
+      {super.key, required this.movie, required this.width});
 
   final int duration = 520;
   final double width;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,7 +52,8 @@ class MovieItemHorizontal extends StatelessWidget {
                 children: [
                   FavouriteIconButton(movie: movie),
                   Expanded(
-                    child: MovieTitle(movieTitle: movie.originalTitle ?? "No Title",),
+                    child: MovieTitle(
+                      movieTitle: movie.originalTitle ?? "No Title",),
                   ),
                   SavedIconButton(movie: movie),
                 ],

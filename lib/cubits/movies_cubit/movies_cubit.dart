@@ -53,7 +53,6 @@ class MoviesCubit extends Cubit<MoviesState> {
       }
       emit(MoviesSuccess());
     } catch (e) {
-      print(e);
       emit(MoviesFailure());
     }
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/cubits/search_cubit/search_cubit.dart';
 import '../pages/search_page.dart';
 
 class CustomSearchBar extends StatefulWidget {
@@ -56,14 +58,17 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return SearchPage(
-                    text: text,
+                  return BlocProvider(
+                    create: (context) => SearchCubit(),
+                    child: SearchPage(
+                      text: text,
+                    ),
                   );
                 },
               ),
             );
           }
-          else{
+          else {
             autovalidateMode = AutovalidateMode.always;
             setState(() {});
           }
